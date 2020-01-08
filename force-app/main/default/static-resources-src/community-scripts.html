@@ -1,0 +1,140 @@
+  <!--- <apex:includeScript value="{!URLFOR($Resource.JSforce)}" />--->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jsforce/1.9.1/jsforce.min.js">
+            </script>
+  <script>
+var token = '{!$API.Session_Id}';
+var conn = new jsforce.Connection({ accessToken: token });
+conn.query('SELECT Id, Name FROM Account', function(err, res) {
+  if (err) { return console.error(err); }
+  console.log(res);alert(res.totalSize);
+});
+  </script>
+  
+<script type="text/javascript">
+    $(document).ready( function(){
+    
+       $( ".checkoutbtn" ).click(function(){
+		     console.log('hi');
+		     var inidvidualItems = ["Professional", "Professional Membership", "Student Transition","Student Membership","Fellow Membership","Retired Membership","Lifetime Fellow Membership","500 Club Membership"];
+		     console.log("Item name = " + $(this).parent().parent().children(".item").children(".item-detail").find("strong").first().text());
+		     var itmName = $(this).parent().parent().children(".item").children(".item-detail").find("strong").first().text();
+		    //  console.log($(this).parent().parent().children("item").children("item-detail"));
+		    console.log("is item found = " + inidvidualItems.includes(itmName));
+		    if(inidvidualItems.includes(itmName)==true){
+		        window.location.href="/joinapi__qualifyingquestions?id=a2729000000e4uWAAQ&order=1";
+		    }
+		    
+		});
+    $('a[href="#em-subscriptions"]').text('My Membership');
+    });   
+</script>
+
+<script type="text/javascript">
+
+(function(window,undefined){
+	 
+	var baseUrl = "membertest.ocdla.org/sites/default/modules/fonteva";
+	
+	
+	
+	var createCssNode = function(url){
+		// console.log('Creating css node for '+url);
+		var cssNode = document.createElement('link');
+		cssNode.type = 'text/css';
+		cssNode.rel = 'stylesheet';
+		cssNode.href = '//'+baseUrl + "/"+url;
+		return cssNode;
+	};
+	
+	var createJsNode = function(url){
+		// console.log('Creating css node for '+url);
+		var jsNode = document.createElement('script');
+		jsNode.type = 'text/javascript';
+		if(url.indexOf('http')===0) {
+			jsNode.src = url;
+		} else {
+			jsNode.src = '//'+baseUrl + "/"+url;
+		}
+		return jsNode;
+	};
+	
+	window.addJs = function(url){
+		var head = document.getElementsByTagName('head')[0];
+		head.appendChild(createJsNode(url));
+	};
+	
+	window.addCss = function(url){
+		var head = document.getElementsByTagName('head')[0];
+		head.appendChild(createCssNode(url));
+	};
+	
+	window.pageUrlContains = function(url){
+		var curLoc;
+		
+		url = url.toLowerCase();
+		curLoc = window.location.href.toLowerCase();
+		return curLoc.indexOf(url) > -1;
+	}
+    
+})(window,undefined);
+
+
+if(pageUrlContains("OrderApi__Checkout") && pageUrlContains("membershipRenewal=true")){
+	addJs("components/checkout-updater/checkout.js");
+}
+
+
+if(pageUrlContains("OrderApi__Checkout")){
+	addCss("components/checkout-updater/checkout.css");
+}
+
+</script>
+
+<script type="text/javascript">
+$(document).ready( function(){
+console.log("CLICKPDX: Overriding A4J error handler.");
+A4J.AJAX.replacePage = function(req){
+    if(req){
+    console.log("A4J AJAX error: ");
+    console.log(req.getError());
+
+    } else console.log("A4J AJAX error, but no req object passed.");
+    
+    return false;
+};
+A4J.AJAX.onError = function(req,status,message){
+    alert("There was an A4J error.");
+	console.log(req);
+	// console.log(status);
+	// console.log(message);
+	// var domresponse = req.getResponseText();
+	req.status = status;
+	
+	alert(req.getError());
+	
+	return false;
+
+
+	// Default error handling text in A4J.AJAX.XmlHTTPRequest.prototype._onerror 
+	// here for posterity
+	/*
+		if(status!=599 && req.getResponseText() && !req.options.ignoreasyncerrors){
+			A4J.AJAX.replacePage(req);
+		}
+	*/
+};
+});
+</script>
+
+
+
+<script type="text/javascript">
+   
+<!--  HIDE ASSIGNMENT PAGE ON JOIN PROCESS{-->
+
+   var curLoc = window.location.href;
+   if (curLoc.indexOf('/joinapi__Assignments?id=a2729000000KCpuAAG&order=4') > -1 ) {
+    var finalsrc = curLoc.replace('/joinapi__Assignments?id=a2729000000KCpuAAG&order=4','/orderapi__checkout?order=4');
+    window.location=finalsrc;
+   }
+</script>

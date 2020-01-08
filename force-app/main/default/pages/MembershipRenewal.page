@@ -1,0 +1,235 @@
+<apex:page docType="html-5.0"
+           showHeader="false"
+           standardStylesheets="false"
+           applyBodyTag="false"
+           applyHtmlTag="false" 
+           cache="false"
+           controller="IABCMembershipRenewalController"
+           action="{!checkValidContactId}">
+           
+    <apex:composition template="{!templateName}">
+        
+        <apex:define name="pageTitle">
+           IABC Membership Renewal
+        </apex:define>
+        <apex:define name="pageStyles">
+            <link rel="stylesheet" href="https://membertest.ocdla.org/sites/default/modules/fonteva/fonteva.css" type="text/css" />
+            <style>
+              .instructions{                                                    
+                padding: 10px 32px;
+                font-weight: 100;
+                margin-left: -22px;
+                }
+                .marginadjust{                                                  
+                    margin-bottom: 0px;
+                    margin-top: 10px;
+                    margin-left: -37px;
+                }
+            </style>
+        </apex:define>   
+        <apex:define name="supernavRight">
+           
+        </apex:define>
+        <apex:define name="pageMain">
+            
+
+            
+                <div class="container noprint">
+                    <div class="well">
+                        <apex:outputPanel id="msg">
+                            <div class="messages well text-center">
+                                <p class="errorMessage"></p>
+                                <!--- <Framework:messages /> --->
+                            </div> 
+                        </apex:outputPanel>
+                        
+                        <h3>
+                            IABC Membership Renewal
+                        </h3>
+                        <hr class="m-b-15" />
+                        
+                        <h1>
+                            Hello, {!theMember.firstName} {!theMember.lastName}
+                        </h1>
+
+                        <div class="intro">
+                            
+						<p>
+                           We’ve selected the following IABC membership for you:
+                        </p>
+
+
+                        </div>
+                        
+
+                        
+                        <div class="panel">
+                        <apex:form html-novalidate="true">
+                            
+                            <apex:actionFunction oncomplete="vfCartActionFunctionComplete('createMockOrderProducts',request,event,data,{!responseData});return false;" name="renderOrderProducts" action="{!renderMockOrderProducts}" reRender="refreshMe" />
+                            
+                            <apex:pageBlock rendered="{!!hasProducts}">
+                            
+                            <h1>
+                                Oops!  We couldn't locate any appropriate membership products.
+                                </h1>
+                                
+                            </apex:pageBlock>
+                            
+                            <!---<apex:actionFunction name="doInit" action="{!initSOL}" rerender="allPanel"/>
+                            <apex:outputPanel id="allPanel">
+                                <apex:outputPanel rendered="{!NOT(initialised)}">--->
+                           	<apex:outputPanel id="allPanel">
+                                <apex:outputPanel >
+                                    <p align="center" style='display:none; font-family:"Arial", Helvetica, sans-serif; font-size:20px;'>
+                                        <apex:image value="/img/loading.gif"/>&nbsp;Please wait
+                                    </p>
+                                    <script>
+                                       window.onload=function()
+                                       {	 
+                                           console.log("Would enable doInit.");
+                                           // doInit();
+                                       };
+                                    </script>
+                                </apex:outputPanel> 
+                            </apex:outputPanel>
+                            
+                            
+                            <apex:outputpanel id="refreshMe" rendered="{!hasProducts}" layout="block">
+                                <div class="product-table">
+                                    
+                                     
+                                    <apex:repeat value="{!products}" var="product" >
+                                        <div class="product product-row">
+                                            <apex:variable var="foobar" value="baz" rendered="{!product.isPrimary}">
+                                                <div class="product-cell product-image product-image-primary">
+                                                    <p>
+                                                        
+                                                        <img src="//s3.us-east-1.amazonaws.com/fonteva-customer-media/00Df2000000BUEoEAO/IgiZPkNF_IABC_Member_Logo_jpeg" class="img-responsive" />
+                                                    </p>
+                                                </div>
+                                            </apex:variable>
+                                            <apex:variable var="foobar2" value="baz" rendered="{!!product.isPrimary}">
+                                                <div class="product-cell product-image"> 
+                                                    <img src="//s3.us-east-1.amazonaws.com/fonteva-customer-media/00Df2000000BUEoEAO/IgiZPkNF_IABC_Member_Logo_jpeg" class="img-responsive" />
+                                                </div>
+                                            </apex:variable>
+                                            <div class="product-cell product-info">
+                                                 
+                                                 
+                                                <div class="product-name">
+                                                    <!---
+
+CPBase__item?id={!product.Id}
+--->
+                                                    <h2>
+                                                        {!product.name}
+                                                    </h2>
+                                                    <apex:outputText rendered="{!product.isPrimary}">
+                                                        <div class="previous-subscription-helper">
+                                                            Based on your previous purchase of <span class="previous-subscription-name">{!previousText}</span>
+                                                        </div>
+													</apex:outputText>
+                                                </div>
+                                                <!---<div class="product-description">
+{!product.description}
+</div>
+--->
+                                                <div class="product-price">
+                                                    <span class="itemPrice">{!product.currencyIsoCode} {!product.price}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </apex:repeat>
+                                    
+                                    <div class="product product-row product-summary">
+                                        
+                                        <div class="product-cell" style="text-align:right;">
+                                            Total:
+                                        </div>
+                                        <div class="product-cell product-info product-total">
+                                            &nbsp;{!currencyIsoCode} {!total}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!---
+I was going to work on the page.  The Product
+--->
+                                
+                                
+                            </apex:outputpanel> 
+                            
+                            <div class="row m-t-30">
+                                <div class="col-md-12 text-center"> 
+                                    <apex:commandButton oncomplete="vfCartActionFunctionComplete('createOrder',request,event,data,{!responseData});return false;" reRender="notFound" styleClass="btn btn-primary ladda-button m-10" value="Continue to Checkout" action="{!prepareCheckout}" />
+                                </div> 
+                            </div>
+                            
+                        </apex:form>
+                        </div>
+
+                        <div class="panel">
+                        <p>
+                            <span style='font-weight:bold;'>You do not need to login to renew your membership.</span><br />
+                            When you are ready to renew, select "Continue to Checkout", below.
+                        </p>
+                        </div>
+
+                    </div>
+                </div>  
+            
+        </apex:define>
+        
+        <apex:define name="pageScripts">
+            
+ <script src="https://code.jquery.com/jquery-1.12.4.js">
+</script>
+             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+</script>
+
+            
+
+            
+            <script type="text/javascript">            
+            function vfCartActionFunctionComplete(action,request,event,data,response){
+
+                console.log("Requested action: "+action);
+                console.log(response);
+                console.log(request);
+                console.log(event);
+                console.log(data);
+                if(response.error){
+                 	alert(response.error);
+                    return;
+                }
+                if("createOrder" == action){
+                    window.location.href = response.OnOrderCreationRedirectPage;
+				}
+                if("createMockOrderProducts" == action){
+                    
+				}
+			}
+            
+                var js$ = jQuery.noConflict();   
+                js$(document).ready(function () {
+                    
+                        
+                       
+                }); 
+            </script>
+            
+            <style type='text/css'>
+            
+            </style>
+            
+            <script src="https://membertest.ocdla.org/sites/default/modules/fonteva/fonteva.js">
+				</script>
+            
+            
+        </apex:define>
+         
+    </apex:composition>
+   
+</apex:page>

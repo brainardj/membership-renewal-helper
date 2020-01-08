@@ -1,0 +1,129 @@
+<apex:page docType="html-5.0"
+           showHeader="false"
+           standardStylesheets="false"
+           applyBodyTag="false"
+           applyHtmlTag="false" 
+           cache="false"
+           controller="ClickpdxDefaultController"
+           extensions="Member">
+           
+    <apex:composition template="CPBase__template">
+        
+        <apex:define name="pageTitle">
+           Member Lookup
+        </apex:define>
+        <apex:define name="pageStyles">
+            <link rel="stylesheet" href="https://membertest.ocdla.org/sites/default/modules/fonteva/fonteva.css" type="text/css" />
+            <link rel="stylesheet" href="https://membertest.ocdla.org/sites/default/modules/fonteva/components/member-lookup/lookup.css" type="text/css" />
+            <style>
+              .instructions{                                                    
+                padding: 10px 32px;
+                font-weight: 100;
+                margin-left: -22px;
+                }
+                .marginadjust{                                                  
+                    margin-bottom: 0px;
+                    margin-top: 10px;
+                    margin-left: -37px;
+                }
+            </style>
+        </apex:define>   
+        <apex:define name="supernavRight">
+           
+        </apex:define>
+        <apex:define name="pageMain">
+            
+
+            
+                <div class="container noprint">
+                    <div class="well">
+                        <apex:outputPanel id="msg">
+                            <div class="messages well text-center">
+                                <p class="errorMessage"></p>
+                                <!--- <Framework:messages /> --->
+                            </div> 
+                        </apex:outputPanel>
+                        
+                        <h3>
+                            IABC Membership Renewal - Member Lookup
+                        </h3>
+                        <hr class="m-b-15" />
+                        
+                        <h1>
+                            Renew Now
+                        </h1>
+
+                        <div class="intro">
+                            
+						<p>
+                           Enter your IABC Member ID to continue:
+                        </p>
+
+
+                        </div>
+                        
+                        <div class="panel">
+                            <form>
+                                
+
+                                <div id="member-lookup">
+                                    
+                                    <div class="form-item">
+                                        <input id="member-id" name="member-id" type="text" value="" placeholder="Member #" />
+                                        <span class="field-errors" id="member-id-field-messages"></span>
+                                    </div>
+                                    <div class="form-item">
+                                        <!---
+<div class="col-md-12 text-center"> 
+<apex:commandButton oncomplete="vfCartActionFunctionComplete('createOrder',request,event,data,responseData);return false;" reRender="notFound" styleClass="btn btn-primary ladda-button m-10" value="Continue to Checkout" action="{!prepareCheckout}" />
+</div> 
+--->
+                                        <div class="form-item form-item-actions">
+                                                    <div id="member-lookup-button" class="form-button btn btn-primary"> 
+                                            Begin Renewal
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            
+                        </div>
+
+                        <div class="panel">
+                        <p>
+                            <span style='font-weight:bold;'>You do not need to login to renew your membership.</span>
+                        </p>
+                        </div>
+
+                    </div>
+                </div>  
+            
+        </apex:define> 
+        
+        <apex:define name="pageScripts">
+            
+ <script src="https://code.jquery.com/jquery-1.12.4.js">
+</script>
+             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+</script>
+            
+
+            
+            <script src="https://membertest.ocdla.org/sites/default/modules/fonteva/fonteva.js">
+				</script>
+            <script src="https://membertest.ocdla.org/sites/default/modules/fonteva/components/member-lookup/lookup.js">
+            </script>
+            
+            <script>
+             setup();
+            </script>
+            <style type='text/css'>
+            
+            </style>
+            
+        </apex:define>
+         
+    </apex:composition>
+   
+</apex:page>

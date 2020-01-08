@@ -1,0 +1,27 @@
+<apex:page standardController="Contact" recordSetVar="contacts" extensions="ClickpdxEmailController">
+   <apex:form >
+      <apex:pageBlock title="Send Email" mode="edit">
+         <apex:pageMessages />
+         <apex:pageBlockButtons location="top">
+            <apex:commandButton value="Send Email" action="{!SendEmail}"/>
+            <apex:commandButton value="Test Email" action="{!TestEmail}"/>
+            <apex:commandButton value="Preview Email" action="{!PreviewEmail}"/>
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+         </apex:pageBlockButtons>
+         <apex:pageBlockTable value="{!selected}" var="c">
+            <apex:column value="{!c.Name}"/>
+            <apex:column headerValue="Email">
+               <apex:inputField value="{!c.Email}"/>
+            </apex:column>
+            <apex:column headerValue="Email">
+               <a href="{!communityUrl}/MembershipRenewal?id={!c.Id}" target="_new">
+               /MembershipRenewal?id={!c.Id}
+               </a>
+            </apex:column>
+            <apex:column headerValue="Sent Date">
+                <!---<apex:inputField value=""/>--->
+            </apex:column>
+         </apex:pageBlockTable>
+      </apex:pageBlock>
+   </apex:form>
+</apex:page>

@@ -1,0 +1,7 @@
+<apex:page >
+	<apex:insert name="pageTitle"></apex:insert>
+	<apex:insert name="pageStyles"></apex:insert>
+    <apex:insert name="supernavRight"></apex:insert>
+    <apex:insert name="pageMain"></apex:insert>
+    <apex:insert name="pageScripts"></apex:insert>
+</apex:page>

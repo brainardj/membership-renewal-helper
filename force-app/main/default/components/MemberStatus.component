@@ -1,0 +1,24 @@
+<apex:component>
+<div class="why" style="display:none;">
+	<h3>
+			How we determined your eligibility:
+	</h3>
+	<div class="query-algorithm">
+			<!--- We used a {!queryType} query to choose your membership. --->
+	</div>
+	<p>
+			<!---
+Member ID: {!member.Member_ID__c}<br />
+			Member Chapter: {!member.Member_Chapter__c}<br />
+			Member Type: {!member.Member_Type__c}<br />
+			Renewal Membership Type: {!member.Renewal_Membership_Type__c}<br />
+			Member Currency: {!member.CurrencyIsoCode}<br />
+			Member Current Membership Type: {!member.Current_Membership_Type__c}<br />
+			Member Membership_Join_Date__c: {!member.Membership_Join_Date__c}<br />
+			Member Membership_Start_Date__c: {!member.Membership_Start_Date__c}<br />
+			Member Membership_End_Date__c: {!member.Membership_End_Date__c}<br />
+			Member Membership_Cancelled_Date__c: {!member.Membership_Cancelled_Date__c}<br />
+--->
+	</p>
+</div>
+</apex:component>
